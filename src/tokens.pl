@@ -38,20 +38,25 @@ type_name(line).
 type_name(circle).
 
 
-% Actual token predicates
-% Those are a green cuts because of the body of 'token(Id, ident(Id))'.
+% Actual token predicates Cuts are used because technically, an input atom can
+% only be associated to one token, so there is no need to search the rest of
+% the tree. These are green cuts I think (as long as there is no X such that
+% out of keyword(X), punctuation(X) and type_name(X), no two are provable at
+% the same time.
 
 % Keywords
-token(Kw, keyword(Kw)) :- keyword(Kw).
+token(Kw, keyword(Kw)) :- keyword(Kw), !.
 
 % Punctuation
-token(P, punctuation(P)) :- punctuation(P).
+token(P, punctuation(P)) :- punctuation(P), !.
 
 % Type names
-token(X, type_name(X)) :- type_name(X).
+token(X, type_name(X)) :- type_name(X), !.
 
 % Identifiers
 token(Id, ident(Id)) :-
   % Id is an identifier only if it isn't also a keyword (otherwise it's a keyword)
   \+ keyword(Id),
-  \+ punctuation(Id).
+  \+ punctuation(Id),
+  \+ type_name(Id),
+  !.
