@@ -2,8 +2,8 @@
 :- use_module(tokens).
 
 % lex(Input, TokenList).
-% "public" predicate that transforms a list of atoms representing the input program
-% into a list of tokens for the parsers.
+% "public" predicate that transforms a list of atoms representing the input
+% program into a list of tokens for the parsers.
 lex([], []).
 lex([InputHead | InputTail], [TokenHead | TokenTail]) :-
   % Get chosen language

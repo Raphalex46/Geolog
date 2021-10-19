@@ -1,6 +1,8 @@
+:- use_module(library(porter_stem)).
+
 :- use_module(load).
 :- use_module(lexer).
-:- use_module(library(porter_stem)).
+:- use_module(parser).
 
   % Program entry point.
 :-
@@ -10,12 +12,18 @@
   assert_options(Opts).
 
 run(Input) :-
-  % Use the tokenize_atom predicate from the porter_stem library to cut the input string
-  % into atoms
+  % Use the tokenize_atom predicate from the porter_stem library to cut the
+  % input string into atoms
   tokenize_atom(Input, AtomList),
   % Run lexer
   print(AtomList), nl,
   % Call the lexer
   lex(AtomList, TokenList),
   % Debug print for testing the lexer.
-  print(TokenList).
+  print('Tokenized input: '), nl,
+  print(TokenList), nl,
+
+  % Pass the list of tokens to the parser.
+  phrase(parse(DeclList, _, _), TokenList),
+  print('Parsed result: '), nl,
+  print(DeclList), nl.

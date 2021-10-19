@@ -6,16 +6,29 @@
 % (which can be obtained with load:option(lang/1).
 
 % All those '!' are green cuts because of the general predicate (see below).
+% (CHANGE LOCATION OF THE TRANSLATIONS LATER)
+
+% English
+% Keywords
 i18n(english, let, let) :- !.
-i18n(french, let, soit) :- !.
+i18n(english, of, of) :- !.
+i18n(english, type, type) :- !.
 
+% Type names
 i18n(english, point, point) :- !.
-i18n(french, point, point) :- !.
 i18n(english, line, line) :- !.
-i18n(french, line, droite) :- !.
 i18n(english, circle, circle) :- !.
-i18n(french, circle, cercle) :- !.
 
+% French
+% Keywords
+i18n(french, let, soit) :- !.
+i18n(french, of, de) :- !.
+i18n(french, type, type) :- !.
+
+% Type names
+i18n(french, point, point) :- !.
+i18n(french, line, droite) :- !.
+i18n(french, circle, cercle) :- !.
 % General translation predicate that says "if it isn't a keyword or a type
 % name, don't bother translating anything" (punctuation or identifiers don't
 % need to be translated obviously)
@@ -27,6 +40,8 @@ i18n(_, Atom, Atom) :- \+ keyword(Atom), \+ type_name(Atom).
 % Keywords
 % This predicate is used to distinguish between keywords and identifiers
 keyword(let).
+keyword(of).
+keyword(type).
 
 % Ponctuation
 punctuation(',').
@@ -55,7 +70,8 @@ token(X, type_name(X)) :- type_name(X), !.
 
 % Identifiers
 token(Id, ident(Id)) :-
-  % Id is an identifier only if it isn't also a keyword (otherwise it's a keyword)
+  % Id is an identifier only if it isn't also a keyword (otherwise it's a
+  % keyword)
   \+ keyword(Id),
   \+ punctuation(Id),
   \+ type_name(Id),
