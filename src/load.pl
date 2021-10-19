@@ -2,7 +2,7 @@
 :- use_module(library(optparse)).
 
 % version(Version).
-version('0.2.0').
+version('0.2.1').
 
 % option(Option).
 :- dynamic option/1.
@@ -52,5 +52,5 @@ parse_command_line(Opts, PositionalArgs) :-
 % as terms of the form option(Opt)
 assert_options([]).
 assert_options([HeadOpt | Opts]) :-
-  assert(option(HeadOpt)),
+  assertz(option(HeadOpt)),
   assert_options(Opts).
