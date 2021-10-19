@@ -2,13 +2,10 @@
 :- use_module(library(optparse)).
 
 % version(Version).
-version('0.1.0').
+version('0.2.0').
 
 % option(Option).
-% Option is a term representing a command line option
-% (load_option is used to be able to declare the 'option' predicate in the module
-% declaration while being able to assert options in the assert_options predicate).
-option(X) :- load_option(X).
+:- dynamic option/1.
 
 % List of available options
 optspecs(
@@ -55,5 +52,5 @@ parse_command_line(Opts, PositionalArgs) :-
 % as terms of the form option(Opt)
 assert_options([]).
 assert_options([HeadOpt | Opts]) :-
-  assert(load_option(HeadOpt)),
+  assert(option(HeadOpt)),
   assert_options(Opts).
