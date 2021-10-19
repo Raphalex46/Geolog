@@ -16,15 +16,11 @@ parse(DeclList, ConsList, GoalList) -->
 % are contained in NameList
 decl(ObjList) -->
   [keyword(let)], name_list(NameList), [keyword(of)], [keyword(type)],
-  [type_name(Type)], {obj_type_list(NameList, Type, ObjList)}, !.
+  [type_name(Type)], {obj_type_list(NameList, Type, ObjList)}.
 
 
 % List versions (meaning, mutiple syntax elements (multiple declarations,
 % multiple constraints
-
-% The cuts are used because, when the entire recursive sequence has been found,
-% there is no need to backtrack (we don't want other interpretations anyway).
-% I think those cuts are red.
 
 % List of declarations (separated by '.').
 
