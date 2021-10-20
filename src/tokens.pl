@@ -1,38 +1,6 @@
-:- module(tokens, [token/2, i18n/3]).
+:- module(tokens, [token/2]).
 :- use_module(load).
-
-% i18n(Language, Key, Translation.
-% This predicate makes to translation according to the provided language
-% (which can be obtained with load:option(lang/1).
-
-% All those '!' are green cuts because of the general predicate (see below).
-% (CHANGE LOCATION OF THE TRANSLATIONS LATER)
-
-% English
-% Keywords
-i18n(english, let, let) :- !.
-i18n(english, of, of) :- !.
-i18n(english, type, type) :- !.
-
-% Type names
-i18n(english, point, point) :- !.
-i18n(english, line, line) :- !.
-i18n(english, circle, circle) :- !.
-
-% French
-% Keywords
-i18n(french, let, soit) :- !.
-i18n(french, of, de) :- !.
-i18n(french, type, type) :- !.
-
-% Type names
-i18n(french, point, point) :- !.
-i18n(french, line, droite) :- !.
-i18n(french, circle, cercle) :- !.
-% General translation predicate that says "if it isn't a keyword or a type
-% name, don't bother translating anything" (punctuation or identifiers don't
-% need to be translated obviously)
-i18n(_, Atom, Atom) :- \+ keyword(Atom), \+ type_name(Atom).
+:- use_module(relation).
 
 % token(Atom, Token).
 % The token predicate converts input tokens into tokens for the parser
@@ -42,6 +10,7 @@ i18n(_, Atom, Atom) :- \+ keyword(Atom), \+ type_name(Atom).
 keyword(let).
 keyword(of).
 keyword(type).
+keyword('is').
 
 % Ponctuation
 punctuation(',').
@@ -51,7 +20,6 @@ punctuation('.').
 type_name(point).
 type_name(line).
 type_name(circle).
-
 
 % Actual token predicates Cuts are used because technically, an input atom can
 % only be associated to one token, so there is no need to search the rest of
@@ -68,6 +36,9 @@ token(P, punctuation(P)) :- punctuation(P), !.
 % Type names
 token(X, type_name(X)) :- type_name(X), !.
 
+% Relations
+token(Rel, relation(Before, Rel, After)) :- relation(Before, Rel, After), !.
+
 % Identifiers
 token(Id, ident(Id)) :-
   % Id is an identifier only if it isn't also a keyword (otherwise it's a
@@ -75,4 +46,5 @@ token(Id, ident(Id)) :-
   \+ keyword(Id),
   \+ punctuation(Id),
   \+ type_name(Id),
+  \+ relation(_, Id, _),
   !.
