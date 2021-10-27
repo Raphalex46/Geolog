@@ -11,6 +11,9 @@ keyword(let).
 keyword(of).
 keyword(type).
 keyword('is').
+keyword(find).
+keyword(such).
+keyword(that).
 
 % Ponctuation
 punctuation(',').
