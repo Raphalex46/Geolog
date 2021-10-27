@@ -8,9 +8,12 @@
 % cons(ObjA, Rel, ObjB) -> constraint between object A and object B (relation)
 
 % Entry symbol. The program is made of a declarations list, a constraint list
-% and a goals list.
-parse(DeclList, ConsList, GoalList) -->
-  decl_list(DeclList), cons_list(ConsList).%, goal_list(GoalList).
+% and a goal list
+
+% We flatten the declarations list to have a nice list of objects with
+% their associated types.
+parse(FlattenedDeclList, ConsList, GoalList) -->
+  decl_list(DeclList), {flatten(DeclList, FlattenedDeclList)}, cons_list(ConsList), goal_list(GoalList).
 
 % Object declaration statement. The user can declare multiple objects (names
 % are contained in NameList
@@ -26,6 +29,14 @@ cons(cons(ObjA, Rel, ObjB)) -->
 % Case where there is no keyword after the relation
 cons(cons(ObjA, Rel, ObjB)) -->
   obj(ObjA), [keyword(Before)], [relation(Before, Rel, nil)], obj(ObjB).
+
+% Goals (objects to find)
+% A 'cons' is added, since we want at least one constraint.
+% (Since cons_list allows empty lists).
+goal(goal(NameList, Type, [ConsHead | ConsList])) -->
+  [keyword(find)], name_list(NameList), [keyword(of), keyword(type),
+  type_name(Type), keyword(such), keyword(that)], cons(ConsHead),
+  [punctuation('.')], cons_list(ConsList).
 
 % Object reference. The object can be the name of a declared object or
 % a call to an object constructor.
@@ -46,6 +57,11 @@ decl_list([DeclHead | DeclTail]) -->
 cons_list([]) --> [].
 cons_list([ConsHead | ConsTail]) -->
   cons(ConsHead), [punctuation('.')], cons_list(ConsTail).
+
+% List of goals
+goal_list([]) --> [].
+goal_list([GoalHead | GoalTail]) -->
+  goal(GoalHead), goal_list(GoalTail).
 
 % List of identifiers (comma separated)
 name_list([Name]) --> [ident(Name)].
