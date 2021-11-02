@@ -2,7 +2,7 @@
 :- use_module(library(optparse)).
 
 % version(Version).
-version('0.3.2').
+version('0.4.1').
 
 % option(Option).
 :- dynamic option/1.
@@ -29,12 +29,36 @@ optspecs(
       help('Natural language selection')
     ],
     [
+      opt(translator),
+      type(atom),
+      shortflags([t]),
+      longflags([translator]),
+      default(proge),
+      help('Translator selection')
+    ],
+    [
+      opt(interactive),
+      type(boolean),
+      shortflags([i]),
+      longflags([it]),
+      default(false),
+      help('Enter the prolog command line after execution (for testing)')
+    ],
+    [
       opt(version),
       type(boolean),
       shortflags([v]),
       longflags([version]),
       default(false),
       help('Print version number and exit')
+    ],
+    [
+      opt(help),
+      type(boolean),
+      shortflags([h]),
+      longflags([help]),
+      default(false),
+      help('Print this help text and exit')
     ]
   ]
 ).
