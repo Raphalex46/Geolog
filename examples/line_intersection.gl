@@ -1,0 +1,5 @@
+let d of type line.
+let e of type line.
+find a of type point such that
+  a is on d.
+  a is on e.
