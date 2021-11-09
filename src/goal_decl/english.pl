@@ -1,3 +1,4 @@
+% This file lists ways to declare goals in the english language setting
 :- module(goal_decl_english, [goal_decl/4]).
 :- use_module(src/typename/english).
 :- use_module(src/name/english).

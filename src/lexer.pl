@@ -1,6 +1,5 @@
 :- module(lexer, [lex/2]).
 :- use_module(tokens).
-:- use_module(i18n).
 
 % lex(Input, TokenList).
 % "public" predicate that transforms a list of atoms representing the input

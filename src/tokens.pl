@@ -1,6 +1,5 @@
 :- module(tokens, [token/2]).
 :- use_module(load).
-:- use_module(relation).
 
 % token(Atom, Token).
 % The token predicate converts input tokens into tokens for the parser
@@ -11,18 +10,14 @@
 % a keyword.
 keyword(Atom) :- \+ upcase_atom(Atom, Atom).
 
-% Ponctuation
+% Punctuation
 % Special predicate for the punctuation characters
 punctuation(',').
 punctuation('.').
 
-% Actual token predicates Cuts are used because technically, an input atom can
-% only be associated to one token, so there is no need to search the rest of
-% the tree. These are green cuts I think (as long as there is no X such that
-% out of keyword(X), punctuation(X) and type_name(X), no two are provable at
-% the same time.
-
 % Keywords
+% The tokenization process actually transforms all keywords to lowercase for
+% simplicity
 token(Kw, Kwl) :- keyword(Kw), downcase_atom(Kw, Kwl).
 
 % Punctuation

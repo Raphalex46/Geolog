@@ -1,3 +1,5 @@
+% This file describes the different ways to declare objects in the english
+% language setting
 :- module(decl_english, [decl/3]).
 
 :- use_module('src/parser_helper').

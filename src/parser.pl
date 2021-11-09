@@ -33,12 +33,15 @@ parse(FlattenedDeclList, ConsList, GoalList) -->
 cons(cons(ObjA, Rel, ObjB)) --> relation(ObjA, Rel, ObjB).
 
 % Goals (objects to find)
+% This predicate calls the language-specific goal_decl predicate followed
+% by a list of constraints.
 % A 'cons' is added, since we want at least one constraint.
 % (Since cons_list allows empty lists).
 goal(goal(NameList, Type, [ConsHead | ConsList])) -->
   goal_decl(NameList, Type), cons(ConsHead), [punctuation('.')], cons_list(ConsList).
 
 % List of declarations (separated by '.').
+% This predicate calls the language-specific decl predicate.
 % Base case: no declaration
 decl_list([]) --> [].
 % Recursive case

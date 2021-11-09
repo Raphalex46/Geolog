@@ -1,3 +1,4 @@
+% This file describes the Proge translator
 :- use_module('../parser_helper').
 
 % Predicate to translate our 'intermediary language' into 
