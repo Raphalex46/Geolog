@@ -9,18 +9,18 @@
 
 % English
 % Keywords
-i18n(english, let, let) :- !.
-i18n(english, of, of) :- !.
-i18n(english, type, type) :- !.
-i18n(english, 'is', 'is') :- !.
-i18n(english, find, find) :- !.
-i18n(english, such, such) :- !.
-i18n(english, that, that) :- !.
+% i18n(english, let, let) :- !.
+% i18n(english, of, of) :- !.
+% i18n(english, type, type) :- !.
+% i18n(english, 'is', 'is') :- !.
+% i18n(english, find, find) :- !.
+% i18n(english, such, such) :- !.
+% i18n(english, that, that) :- !.
 
 % Type names
-i18n(english, point, point) :- !.
-i18n(english, line, line) :- !.
-i18n(english, circle, circle) :- !.
+% i18n(english, point, point) :- !.
+% i18n(english, line, line) :- !.
+% i18n(english, circle, circle) :- !.
 
 % Relations
 i18n(english, middle, middle) :- !.
@@ -49,5 +49,6 @@ i18n(french, on, sur) :- !.
 % name, don't bother translating anything" (punctuation or identifiers don't
 % need to be translated obviously)
 i18n(_, Atom, Atom) :-
-  \+ tokens:keyword(Atom), \+ tokens:type_name(Atom), \+ relation:relation(_, Atom, _).
+  % tokens:keyword(Atom),
+   \+ tokens:type_name(Atom), \+ relation:relation(_, Atom, _).
 

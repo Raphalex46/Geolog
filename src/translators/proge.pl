@@ -36,7 +36,9 @@ translate_decl(N, [obj(Name, Type) | DeclTail], Translation, DeclType) :-
   Index is N - (ListLength + 1), 
   % Actually translate the declaration
   translate_type_name(Type, ProgeType),
-  atomics_to_string([Index, ' \'dec:\' ', ProgeType, ' :: ', Name, ' ',
+  % Make the name lowercase (since Proge uses prolog directly)
+  downcase_atom(Name, DownName),
+  atomics_to_string([Index, ' \'dec:\' ', ProgeType, ' :: ', DownName, ' ',
   DeclType, '.\n'],
   InterTranslation),
   % Recursive call followed by string concatenation
@@ -52,7 +54,10 @@ translate_cons(N, [cons(ObjA, Rel, ObjB) | ConsTail], Translation) :-
   Index is N - (ListLength + 1),
   % Actually translate the constraint
   translate_relation(ObjA, Rel, ObjB, TransRel),
-  atomics_to_string([Index, ' \'cont:\' ', ObjA, ' ', TransRel, ' ', ObjB,
+  downcase_atom(ObjA, DownObjA),
+  downcase_atom(ObjB, DownObjB),
+  atomics_to_string([Index, ' \'cont:\' ', DownObjA, ' ', TransRel, ' ',
+  DownObjB,
   '.\n'],
   InterTranslation),
   % Recursive call followed by string concatenation
