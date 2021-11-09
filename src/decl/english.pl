@@ -8,4 +8,4 @@
 
 % Declaration symbol
 decl(DeclList) --> [let], name_list(NameList), [be, of, type],
-typename(TypeName), {obj_type_list(NameList, TypeName, DeclList)}.
+typename(Typename), {obj_type_list(NameList, Typename, DeclList)}.
