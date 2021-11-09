@@ -1,6 +1,6 @@
 % Module that describes relations
 :- module(relation_english, [relation/5]).
-:- use_module(src/obj/english).
+:- use_module(src/langs/english/obj).
 
 relation(ObjA, middle, ObjB) -->
   obj(ObjA), ['is', the, middle, of], obj(ObjB).

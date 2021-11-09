@@ -1,2 +1,2 @@
 :- module(obj_english, [obj/3]).
-:- consult(src/obj/global).
+:- consult(src/obj).

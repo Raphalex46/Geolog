@@ -6,9 +6,9 @@
 % Load correct language modules
 load_modules :-
   option(lang(Lang)),
-  use_module(src/decl/Lang),
-  use_module(src/relation/Lang),
-  use_module(src/goal_decl/Lang).
+  use_module(src/langs/Lang/decl),
+  use_module(src/langs/Lang/relation),
+  use_module(src/langs/Lang/goal_decl).
 
 % We associate a prolog term to each syntax element. 
 %

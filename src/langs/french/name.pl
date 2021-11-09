@@ -1,5 +1,5 @@
 :- module(name_french, [name_list/3]).
-:- consult(src/name/global).
+:- consult(src/name).
 :- multifile name_french:name_list/3.
 
 name_list([Name]) --> [ident(Name)].

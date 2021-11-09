@@ -3,8 +3,8 @@
 :- module(decl_english, [decl/3]).
 
 :- use_module('src/parser_helper').
-:- use_module('src/typename/english').
-:- use_module('src/name/english').
+:- use_module('src/langs/english/typename').
+:- use_module('src/langs/english/name').
 
 % Declaration symbol
 decl(DeclList) --> [let], name_list(NameList), [be, of, type],
