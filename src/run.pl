@@ -44,6 +44,8 @@ main :-
     read_file_to_string(Filename, InputString, []),
     (
       run(InputString, FinalTranslation),
+      % Check if there was a compilation error
+      \+ comp_error,
       write(FinalTranslation)
     ; write('Compilation error. Aborting.'), nl
     ),
