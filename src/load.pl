@@ -2,7 +2,7 @@
 :- use_module(library(optparse)).
 
 % version(Version).
-version('0.5.2').
+version('0.5.3').
 
 % option(Option).
 :- dynamic option/1.
