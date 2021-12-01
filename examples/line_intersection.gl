@@ -1,5 +1,5 @@
-let d of type line.
-let e of type line.
-find a of type point such that
-  a is on d.
-  a is on e.
+let D be of type line.
+let E be of type line.
+find A of type point such that
+  A is on D.
+  A is on E.

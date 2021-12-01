@@ -1,10 +1,7 @@
-:- module(relation, [relation/3]).
+% This file list every available type in the language with the 'relation/1'
+% predicate. Needs to be extended later with corpuses
 
-% Temporary static list of relations
-%
-% relation(Before, Rel, After)
-% Before is a keyword expected in front of the relation
-% Rel is the relation identifier itself
-% After is a keyword expected after the relation
-relation('is', middle, of).
-relation('is', on, nil).
+:- module(relation, [relation/1]).
+
+relation(middle).
+relation(on).
