@@ -1,4 +1,3 @@
-D, E sont des droites.
+B, C sont des points.
 trouver A de type point tel que
-  A est sur D.
-  E contient A. 
+  A est le milieu de [B C].

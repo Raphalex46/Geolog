@@ -14,6 +14,10 @@ keyword(Atom) :- \+ upcase_atom(Atom, Atom).
 % Special predicate for the punctuation characters
 punctuation(',').
 punctuation('.').
+punctuation('(').
+punctuation(')').
+punctuation('[').
+punctuation(']').
 
 % Keywords
 % The tokenization process actually transforms all keywords to lowercase for

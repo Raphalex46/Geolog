@@ -55,11 +55,9 @@ translate_cons(N, [cons(ObjA, Rel, ObjB) | ConsTail], Translation) :-
   Index is N - (ListLength + 1),
   % Actually translate the constraint
   translate_relation(ObjA, Rel, ObjB, TransRel),
-  downcase_atom(ObjA, DownObjA),
-  downcase_atom(ObjB, DownObjB),
-  atomics_to_string([Index, ' \'cont:\' ', DownObjA, ' ', TransRel, ' ',
-  DownObjB,
-  '.\n'],
+  % Transform it to downcase
+  downcase_atom(TransRel, DownTransRel),
+  atomics_to_string([Index, ' \'cont:\' ', DownTransRel, '.\n'],
   InterTranslation),
   % Recursive call followed by string concatenation
   translate_cons(N, ConsTail, NextTranslation),
@@ -92,6 +90,17 @@ translate_type_name(Type, Type).
 
 % Same thing with the cuts
 
-translate_relation(_, on, _, est_sur) :- !.
+translate_relation(ident(A), on, ident(B), Translation) :-
+  atomic_list_concat([A, 'est_sur', B], ' ', Translation).
+  
+translate_relation(ident(A), middle, segment(B, C), Translation)
+:-
+  atomic_list_concat([A, '\'=p=\'', 'mil(', B, ',', C, ')'], ' ', Translation).
+
+translate_relation(ident(A), ccc, triangle(B, C, D), Translation) :-
+  atomic_list_concat(['ccc(', B, ', ', C, ', ', D, ')'], Constructor),
+  atomic_list_concat([A, '\'=p=\'', Constructor], ' ', Translation).
+  
 % General no-translation case
-translate_relation(_, Rel, _, Rel).
+translate_relation(_, Rel, _, Rel) :-
+  write('Unknown relation').

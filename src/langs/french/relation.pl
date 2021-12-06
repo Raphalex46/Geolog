@@ -5,9 +5,14 @@
 
 relation(ObjA, middle, ObjB) -->
   obj(ObjA), [est, milieu, de], obj(ObjB).
+relation(ObjA, middle, ObjB) -->
+  obj(ObjA), [est, le, milieu, de], obj(ObjB).
 
 relation(ObjA, on, ObjB) -->
   obj(ObjA), [est, sur], obj(ObjB).
 
 relation(ObjA, on, ObjB) -->
   obj(ObjB), [contient], obj(ObjA).
+  
+relation(ObjA, ccc, ObjB) -->
+  obj(ObjA), [est, le, centre, du, cercle, circonscrit, à], obj(ObjB).
