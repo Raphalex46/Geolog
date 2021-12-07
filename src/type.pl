@@ -5,4 +5,5 @@
 
 type(point).
 type(line).
+type(circle).
 

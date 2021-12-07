@@ -13,6 +13,12 @@ relation(ObjA, on, ObjB) -->
 
 relation(ObjA, on, ObjB) -->
   obj(ObjB), [contient], obj(ObjA).
+
+relation(ObjA, on, ObjB) -->
+  obj(ObjB), [passe, par], obj(ObjA).
   
 relation(ObjA, ccc, ObjB) -->
   obj(ObjA), [est, le, centre, du, cercle, circonscrit, à], obj(ObjB).
+
+relation(ObjA, eq, ObjB) -->
+  obj(ObjA), [punctuation('=')], obj(ObjB).

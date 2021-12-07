@@ -5,9 +5,9 @@
 :- use_module(src/parser_helper).
 :- use_module(src/langs/french/name).
 
-% More formal declaratin
+% More formal declaration
 decl(DeclList) -->
-  decl_header, name_list(NameList), [de, type], typename(Typename),
+  decl_header, name_list(NameList), optional([de, type]), generic_typename(Typename),
   {obj_type_list(NameList, Typename, DeclList)}.
 
 % Declaration with subject first
@@ -36,3 +36,4 @@ decl(DeclList) -->
 decl_header --> [soit].
 decl_header --> [on, considère].
 decl_header --> [on, nomme].
+decl_header --> [on, se, donne].

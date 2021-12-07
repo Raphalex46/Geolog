@@ -1,0 +1,10 @@
+On se donne A et B des points.
+C est un cercle.
+Construire les points F et E tels que
+  F est sur C.
+  E est sur C.
+Construire une droite D telle que
+  D passe par E.
+  D passe par F.
+  B E = B F.
+

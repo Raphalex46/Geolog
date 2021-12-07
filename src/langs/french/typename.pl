@@ -1,18 +1,33 @@
-:- module(typename_french, [typename/3, plural_typename/3]).
+:- module(typename_french, [typename/3, plural_typename/3, generic_typename/3]).
+:- use_module(src/parser_helper).
 
+% For syntaxic constructions that don't care about plural or singular
+generic_typename(Type) --> typename(Type).
+generic_typename(Type) --> plural_typename(Type).
+
+% Singular
+%
 % Points
-typename(point) --> [point].
-typename(point) --> [un, point].
-typename(point) --> [le, point].
+typename(point) --> article, [point].
 
 % Lines
-typename(line) --> [droite].
-typename(line) --> [une, droite].
-typename(line) --> [la, droite].
+typename(line) --> article, [droite].
 
-% Plural version for the typenames
-plural_typename(point) --> [des, points].
-plural_typename(point) --> [les, points].
+% Circles
+typename(circle) --> article, [cercle].
 
-plural_typename(line) --> [des, droites].
-plural_typename(line) --> [les, droites].
+% Plural
+
+% Points
+plural_typename(point) --> plural_article, [points].
+
+% Lines
+plural_typename(line) --> plural_article, [droites].
+
+% Circles
+plural_typename(circle) --> plural_article, [cercles].
+
+% Little symbols for articles
+article --> choice([[la], [le], [un], [une], []]).
+plural_article --> choice([[les], [des], []]).
+

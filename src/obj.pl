@@ -3,3 +3,4 @@
 obj(ident(Name)) --> [ident(Name)].
 obj(segment(A, B)) --> [punctuation('['), ident(A), ident(B), punctuation(']')].
 obj(triangle(A, B, C)) --> [ident(A), ident(B), ident(C)].
+obj(distance(A, B)) --> [ident(A), ident(B)].

@@ -84,6 +84,7 @@ goal_list_to_cons_list([goal(_, _, GoalConsList) | GoalTail], ConsList) :-
 % Use cuts for each 'defined' translation so we can have
 % a general translation so unknown types just 'go through'
 translate_type_name(line, droite) :- !.
+translate_type_name(circle, cercle) :- !.
 translate_type_name(Type, Type).
 
 % translate_relation(ObjA, Rel, ObjB, TransRel)
@@ -100,6 +101,11 @@ translate_relation(ident(A), middle, segment(B, C), Translation)
 translate_relation(ident(A), ccc, triangle(B, C, D), Translation) :-
   atomic_list_concat(['ccc(', B, ', ', C, ', ', D, ')'], Constructor),
   atomic_list_concat([A, '\'=p=\'', Constructor], ' ', Translation).
+
+translate_relation(distance(A, B), eq, distance(C, D), Translation) :-
+  atomic_list_concat(['dist(', A, ', ', B, ')'], DistA),
+  atomic_list_concat(['dist(', C, ', ', D, ')'], DistB),
+  atomic_list_concat([DistA, ' \'=l=\' ', DistB], Translation).
   
 % General no-translation case
 translate_relation(_, Rel, _, Rel) :-

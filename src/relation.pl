@@ -6,3 +6,4 @@
 relation(middle).
 relation(on).
 relation(ccc).
+relation(eq).
