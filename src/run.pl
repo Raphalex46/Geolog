@@ -47,7 +47,11 @@ main :-
       % Check if there was a compilation error
       \+ comp_error,
       write(FinalTranslation)
-    ; write('Compilation error. Aborting.'), nl
+    ; write('Compilation error. Aborting.'), nl,
+      % Get all of the compile error messages and display them
+      % setof(Message, comp_error_message(Message), MessageSet),
+      comp_error_message(Message),
+      write(Message), nl
     ),
     % Check for interactive mode and exit if it is false
     (
@@ -70,7 +74,11 @@ run(Input, FinalTranslation) :-
   % Pass the list of tokens to the parser.
   % The cut is used to keep only the first correct solution (we don't need
   % other solutions)
-  phrase(parse(DeclList, ConsList, GoalList), TokenList), !,
+  (
+    phrase(parse(DeclList, ConsList, GoalList), TokenList), !
+  ;
+    assert(comp_error)
+  ),
   translate(DeclList, ConsList, GoalList, FinalTranslation), !.
 
 % Utility predicate that does what it says

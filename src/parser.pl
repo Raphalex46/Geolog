@@ -1,4 +1,4 @@
-:- module(parser, [parse/5, comp_error/0]).
+:- module(parser, [parse/5, comp_error/0, comp_error_message/1]).
 :- use_module(parser_helper).
 :- use_module(tokens).
 :- use_module(load).
@@ -12,6 +12,7 @@
 % calling predicate to throw away the result of the compilation.
 
 :- dynamic comp_error/0.
+:- dynamic comp_error_message/1.
 
 % Load correct language modules
 load_modules :-
@@ -71,8 +72,12 @@ check_relation_module([RelHead | RelTail]) :-
 parse(FlattenedDeclList, ConsList, GoalList) -->
 % Load modules corresponding to the selected language
   { load_modules, check_modules },
-  decl_list(DeclList), {flatten(DeclList, FlattenedDeclList)},
-  cons_list(ConsList), goal_list(GoalList).
+  (decl_list(DeclList); {assert(comp_error_message('An error occured while \c
+    parsing a declaration'))}), {flatten(DeclList, FlattenedDeclList)},
+  (cons_list(ConsList); {assert(comp_error_message('An error occured while \c
+    parsing a constraint'))}),
+  (goal_list(GoalList); {assert(comp_error_message('An error occured while \c
+    parsing a goal'))}).
 
 % Constraints between two objects.
 % This predicate just calls the language-specific relation predicate.
