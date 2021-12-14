@@ -4,7 +4,7 @@ Geolog is a description language for geometric construction problems written in 
 ## Requirements
 
 In order for Geolog to run, you need to have a prolog interpreter installed.
-SWI-Prolog is recommended, because the compiler was written for, and tester with
+SWI-Prolog is recommended, because the compiler was written for, and tested with
 SWI-Prolog.
 
 ## Usage
